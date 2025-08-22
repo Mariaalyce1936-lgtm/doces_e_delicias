@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doces e Delícias</title>
+  <style>
+    /* ===== RESET ===== */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+
+    /* ===== CORES ===== */
+    :root {
+      --rosa: #ffc0cb;
+      --azul: #a3d2f3;
+      --branco: #fff;
+      --cinza: #f5f5f5;
+      --preto: #333;
+    }
+
+    body { background-color: var(--cinza); color: var(--preto); }
+
+    /* CABEÇALHO */
+    header { background-color: var(--rosa); padding:20px 0; position:sticky; top:0; z-index:1000; }
+    header .container { display:flex; justify-content:space-between; align-items:center; max-width:1000px; margin:0 auto; padding:0 20px; }
+    header h1 { color: var(--preto); }
+    nav ul { list-style:none; display:flex; gap:20px; }
+    nav a { text-decoration:none; color: var(--preto); font-weight:600; transition:0.3s; }
+    nav a:hover { color: var(--azul); }
+
+    /* HERO */
+    .hero { background-color: var(--azul); color: var(--preto); text-align:center; padding:80px 20px; }
+    .hero h2 { font-size:2.5rem; margin-bottom:20px; }
+    .hero p { font-size:1.2rem; margin-bottom:30px; }
+    .btn { background-color: var(--rosa); color: var(--preto); padding:10px 25px; border:none; border-radius:25px; cursor:pointer; font-weight:600; transition:0.3s; }
+    .btn:hover { background-color: var(--preto); color: var(--branco); }
+
+    /* SEÇÕES */
+    .container { max-width:1000px; margin:50px auto; padding:0 20px; }
+    h2 { text-align:center; margin-bottom:30px; }
+
+    /* PRODUTOS */
+    .produtos .cards { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+    .card { background-color: var(--branco); border-radius:10px; overflow:hidden; box-shadow:0 4px 8px rgba(0,0,0,0.1); width:250px; text-align:center; cursor:pointer; transition: transform 0.3s, box-shadow 0.3s; }
+    .card:hover { transform: translateY(-10px); box-shadow:0 8px 16px rgba(0,0,0,0.2); }
+    .card img { width:100%; height:180px; object-fit:cover; }
+    .card h3 { margin:15px 0 10px; color: var(--preto); }
+
+    /* CONTATO */
+    form { display:flex; flex-direction:column; gap:15px; }
+    input, textarea { padding:10px; border-radius:5px; border:1px solid #ccc; width:100%; color:var(--preto); }
+    input::placeholder, textarea::placeholder { color:#888; }
+    form button { background-color: var(--azul); color: var(--preto); padding:10px; border:none; border-radius:25px; font-weight:600; cursor:pointer; transition:0.3s; }
+    form button:hover { background-color: var(--preto); color: var(--branco); }
+
+    /* MODAL */
+    .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:1001; }
+    .modal-content { background-color:var(--branco); padding:20px; border-radius:10px; text-align:center; max-width:400px; color:var(--preto); }
+    .fechar { float:right; font-size:1.5rem; cursor:pointer; }
+
+    /* VOLTAR AO TOPO */
+    #topBtn { display:none; position:fixed; bottom:30px; right:30px; font-size:1.5rem; background-color: var(--rosa); color:var(--preto); border:none; border-radius:50%; width:45px; height:45px; cursor:pointer; transition:0.3s; z-index:1002; }
+    #topBtn:hover { background-color:var(--preto); color:var(--branco); }
+
+    /* RODAPÉ */
+    footer { background-color:var(--cinza); text-align:center; padding:20px 0; margin-top:50px; color:var(--preto); }
+
+    /* RESPONSIVO */
+    @media(max-width:768px) {
+      .produtos .cards { flex-direction:column; align-items:center; }
+      header .container { flex-direction:column; gap:10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>🍬 Doces e Delícias</h1>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#produtos">Produtos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <h2>Doces que encantam!</h2>
+    <p>Descubra nossas delícias feitas com amor e carinho.</p>
+    <button class="btn" onclick="document.getElementById('produtos').scrollIntoView({behavior:'smooth'});">Ver Produtos</button>
+  </section>
+
+  <section id="sobre" class="container">
+    <h2>Sobre Nós</h2>
+    <p>Na Doces e Delícias, cada doce é preparado com ingredientes de qualidade e dedicação. Nosso objetivo é trazer alegria e sabor para cada momento especial.</p>
+  </section>
+
+  <section id="produtos" class="produtos container">
+    <h2>Nossos Produtos</h2>
+    <div class="cards">
+      <div class="card" data-title="Brownie" data-desc="Delicioso brownie de chocolate com cobertura cremosa.">
+        <img src="brownie.jpg" alt="Brownie">
+        <h3>Brownie</h3>
+      </div>
+      <div class="card" data-title="Brigadeiro" data-desc="Brigadeiro tradicional brasileiro, perfeito para qualquer ocasião.">
+        <img src="brigadeiro.jpg" alt="Brigadeiro">
+        <h3>Brigadeiro</h3>
+      </div>
+      <div class="card" data-title="Cupcake" data-desc="Cupcake fofinho com cobertura cremosa e decorativa.">
+        <img src="cupcake.jpg" alt="Cupcake">
+        <h3>Cupcake</h3>
+      </div>
+      <div class="card" data-title="Bolo de Pote" data-desc="Bolo de pote delicioso, pronto para saborear a qualquer hora.">
+        <img src="bolo_de_pote.jpg" alt="Bolo de Pote">
+        <h3>Bolo de Pote</h3>
+      </div>
+      <div class="card" data-title="Beijinho" data-desc="Beijinho tradicional com coco ralado, doce e macio.">
+        <img src="beijinho.jpg" alt="Beijinho">
+        <h3>Beijinho</h3>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="container">
+    <h2>Contato</h2>
+    <form id="form-contato">
+      <input type="text" name="nome" placeholder="Seu nome" required>
+      <input type="email" name="email" placeholder="Seu e-mail" required>
+      <textarea name="mensagem" placeholder="Sua mensagem" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="fechar">&times;</span>
+      <h3 id="modal-titulo"></h3>
+      <p id="modal-descricao"></p>
+    </div>
+  </div>
+
+  <button id="topBtn" title="Voltar ao topo">⬆️</button>
+
+  <footer>
+    <p>© 2025 Doces e Delícias | Recife, PE</p>
+  </footer>
+
+  <script>
+    // FORMULÁRIO
+    document.getElementById('form-contato').addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('Mensagem enviada com sucesso! 😊');
+      this.reset();
+    });
+
+    // MODAL
+    const modal = document.getElementById('modal');
+    const modalTitulo = document.getElementById('modal-titulo');
+    const modalDescricao = document.getElementById('modal-descricao');
+    const fechar = document.querySelector('.fechar');
+
+    document.querySelectorAll('.card').forEach(card=>{
+      card.addEventListener('click', ()=>{
+        modal.style.display='flex';
+        modalTitulo.textContent = card.dataset.title;
+        modalDescricao.textContent = card.dataset.desc;
+      });
+    });
+
+    fechar.addEventListener('click', ()=> modal.style.display='none');
+    window.addEventListener('click', e=> { if(e.target===modal) modal.style.display='none'; });
+
+    // VOLTAR AO TOPO
+    const topBtn = document.getElementById('topBtn');
+    window.addEventListener('scroll', ()=>{
+      if(document.documentElement.scrollTop>200){ topBtn.style.display='block'; }
+      else{ topBtn.style.display='none'; }
+    });
+    topBtn.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+  </script>
+
+</body>
+</html>
